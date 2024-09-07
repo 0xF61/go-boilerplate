@@ -1,0 +1,25 @@
+services:
+  dev-air:
+    image: cosmtrek/air
+    container_name: app-dev
+    environment:
+      PORT: 3000
+      POSTGRES_DBNAME: postgres
+      POSTGRES_HOST: db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    depends_on:
+      - db
+    ports:
+      - 3000:3000
+    working_dir: /app
+    volumes:
+      - $PWD:/app
+
+  db:
+    image: postgres:16.4
+    container_name: db-dev
+    shm_size: 128mb
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
